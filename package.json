@@ -1,0 +1,23 @@
+{
+	"name": "roverjs",
+	"version": "1.0.0",
+	"description": "rover implementation using JS",
+	"type": "module",
+	"main": "main.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Andrelpoj/RoverJS.git"
+	},
+	"keywords": [
+		"nodejs"
+	],
+	"author": "Andre Pereira",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Andrelpoj/RoverJS/issues"
+	},
+	"homepage": "https://github.com/Andrelpoj/RoverJS#readme"
+}
