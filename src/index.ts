@@ -4,6 +4,8 @@ import fs from "node:fs"
 import path from "node:path"
 
 import * as process from "./process"
+import * as movement from "./movement"
+import * as rotation from "./rotation"
 
 const readInterface = readline.createInterface({
 	input: fs.createReadStream(path.join("./", argv[2])),
@@ -11,9 +13,9 @@ const readInterface = readline.createInterface({
 
 let currentLine = -1
 
-let plateau: process.Plateau
-let position: process.Position
-let direction: process.Direction
+let plateau: movement.Position
+let position: movement.Position
+let direction: rotation.Direction
 let instructions: process.Instruction[]
 
 readInterface.on("line", function (line) {
@@ -30,7 +32,7 @@ readInterface.on("line", function (line) {
 	if (isPosition) {
 		const raw = line.split(" ")
 		position = { x: +raw[0], y: +raw[1] }
-		direction = raw[2] as process.Direction
+		direction = raw[2] as rotation.Direction
 		return
 	}
 
