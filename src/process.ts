@@ -1,17 +1,14 @@
-export type Direction = "N" | "S" | "W" | "E"
-
+export type Instruction = Move | Rotation
 export type Rotation = "L" | "R"
-
 export type Move = "M"
 
-export type Instruction = Move | Rotation
-
 import * as movement from "./movement"
+import * as rotation from "./rotation"
 
 const move = (
 	plateau: movement.Plateau,
 	position: movement.Position,
-	direction: Direction
+	direction: rotation.Direction
 ): movement.Position => {
 	switch (direction) {
 		case "N":
@@ -25,27 +22,15 @@ const move = (
 	}
 }
 
-const rotate = (current: Direction, rotate: Rotation) => {
-	switch (current) {
-		case "N":
-			if (rotate === "L") return "W"
-			return "E"
-		case "S":
-			if (rotate === "L") return "E"
-			return "W"
-		case "W":
-			if (rotate === "L") return "S"
-			return "N"
-		case "E":
-			if (rotate === "L") return "N"
-			return "S"
-	}
+const rotate = (current: rotation.Direction, rotate: Rotation) => {
+	if (rotate === "L") return rotation.RotateLeft(current)
+	return rotation.RotateRight(current)
 }
 
 export const execute = (
 	plateau: movement.Plateau,
 	position: movement.Position,
-	direction: Direction,
+	direction: rotation.Direction,
 	instructions: Instruction[]
 ) => {
 	instructions.forEach(instruction => {

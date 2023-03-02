@@ -1,3 +1,5 @@
+//TODO: Plateau should be instatiated at the beginnning
+
 export type Position = {
 	x: number
 	y: number
