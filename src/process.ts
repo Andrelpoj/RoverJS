@@ -1,41 +1,27 @@
-import { Direction } from "./process"
 export type Direction = "N" | "S" | "W" | "E"
 
 export type Rotation = "L" | "R"
 
 export type Move = "M"
 
-export type Position = {
-	x: number
-	y: number
-}
-
-export type Plateau = {
-	x: number
-	y: number
-}
-
 export type Instruction = Move | Rotation
 
+import * as movement from "./movement"
+
 const move = (
-	plateau: Plateau,
-	position: Position,
+	plateau: movement.Plateau,
+	position: movement.Position,
 	direction: Direction
-): Position => {
-	let newX: number, newY: number
+): movement.Position => {
 	switch (direction) {
 		case "N":
-			newY = position.y + 1 <= plateau.y ? position.y + 1 : plateau.y
-			return { x: position.x, y: newY }
+			return movement.MoveNorth(plateau, position)
 		case "S":
-			newY = position.y - 1 >= 0 ? position.y - 1 : 0
-			return { x: position.x, y: newY }
+			return movement.MoveSouth(plateau, position)
 		case "W":
-			newX = position.x - 1 >= 0 ? position.x - 1 : 0
-			return { x: newX, y: position.y }
+			return movement.MoveWest(plateau, position)
 		case "E":
-			newX = position.x + 1 <= plateau.x ? position.x + 1 : plateau.x
-			return { x: newX, y: position.y }
+			return movement.MoveEast(plateau, position)
 	}
 }
 
@@ -57,8 +43,8 @@ const rotate = (current: Direction, rotate: Rotation) => {
 }
 
 export const execute = (
-	plateau: Plateau,
-	position: Position,
+	plateau: movement.Plateau,
+	position: movement.Position,
 	direction: Direction,
 	instructions: Instruction[]
 ) => {
