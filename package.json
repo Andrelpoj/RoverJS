@@ -2,9 +2,11 @@
 	"name": "roverjs",
 	"version": "1.0.0",
 	"description": "rover implementation using JS",
-	"type": "module",
 	"main": "index.js",
 	"scripts": {
+		"bs": "npm run build | npm start",
+		"start": "node build/index.js",
+		"build": "npx tsc",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
@@ -21,6 +23,7 @@
 	},
 	"homepage": "https://github.com/Andrelpoj/RoverJS#readme",
 	"devDependencies": {
+		"@types/node": "^18.14.4",
 		"typescript": "^4.9.5"
 	}
 }

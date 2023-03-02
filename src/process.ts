@@ -1,21 +1,21 @@
-type Direction = "N" | "S" | "W" | "E"
+export type Direction = "N" | "S" | "W" | "E"
 
-type Rotation = "L" | "R"
+export type Rotation = "L" | "R"
 
-type Move = "M"
+export type Move = "M"
 
-type Position = {
+export type Position = {
 	x: number
 	y: number
 	direction: Direction
 }
 
-type Plateau = {
+export type Plateau = {
 	x: number
 	y: number
 }
 
-type Instruction = Move | Rotation
+export type Instruction = Move | Rotation
 
 const move = (plateau: Plateau, position: Position): Position => {
 	let newX: number, newY: number
@@ -71,7 +71,7 @@ const rotate = (current: Direction, rotate: Rotation) => {
 	}
 }
 
-const execute = (
+export const execute = (
 	plateau: Plateau,
 	position: Position,
 	instructions: Instruction[]
@@ -94,5 +94,3 @@ const execute = (
 
 	console.log(`${position.x} ${position.y} ${position.direction}`)
 }
-
-export { execute }
