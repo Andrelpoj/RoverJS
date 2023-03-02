@@ -19,5 +19,8 @@
 	"bugs": {
 		"url": "https://github.com/Andrelpoj/RoverJS/issues"
 	},
-	"homepage": "https://github.com/Andrelpoj/RoverJS#readme"
+	"homepage": "https://github.com/Andrelpoj/RoverJS#readme",
+	"devDependencies": {
+		"typescript": "^4.9.5"
+	}
 }
