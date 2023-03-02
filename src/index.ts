@@ -13,6 +13,7 @@ let currentLine = -1
 
 let plateau: process.Plateau
 let position: process.Position
+let direction: process.Direction
 let instructions: process.Instruction[]
 
 readInterface.on("line", function (line) {
@@ -28,14 +29,11 @@ readInterface.on("line", function (line) {
 	const isPosition = currentLine % 2 === 1
 	if (isPosition) {
 		const raw = line.split(" ")
-		position = {
-			x: +raw[0],
-			y: +raw[1],
-			direction: raw[2] as process.Direction,
-		}
+		position = { x: +raw[0], y: +raw[1] }
+		direction = raw[2] as process.Direction
 		return
 	}
 
 	instructions = line.split("").map(v => v as process.Instruction)
-	process.execute(plateau, position, instructions)
+	process.execute(plateau, position, direction, instructions)
 })

@@ -1,3 +1,4 @@
+import { Direction } from "./process"
 export type Direction = "N" | "S" | "W" | "E"
 
 export type Rotation = "L" | "R"
@@ -7,7 +8,6 @@ export type Move = "M"
 export type Position = {
 	x: number
 	y: number
-	direction: Direction
 }
 
 export type Plateau = {
@@ -17,40 +17,25 @@ export type Plateau = {
 
 export type Instruction = Move | Rotation
 
-const move = (plateau: Plateau, position: Position): Position => {
+const move = (
+	plateau: Plateau,
+	position: Position,
+	direction: Direction
+): Position => {
 	let newX: number, newY: number
-	switch (position.direction) {
+	switch (direction) {
 		case "N":
 			newY = position.y + 1 <= plateau.y ? position.y + 1 : plateau.y
-			return {
-				x: position.x,
-				y: newY,
-				direction: position.direction,
-			}
+			return { x: position.x, y: newY }
 		case "S":
 			newY = position.y - 1 >= 0 ? position.y - 1 : 0
-			return {
-				x: position.x,
-				y: newY,
-				direction: position.direction,
-			}
+			return { x: position.x, y: newY }
 		case "W":
 			newX = position.x - 1 >= 0 ? position.x - 1 : 0
-			return {
-				x: newX,
-				y: position.y,
-				direction: position.direction,
-			}
+			return { x: newX, y: position.y }
 		case "E":
 			newX = position.x + 1 <= plateau.x ? position.x + 1 : plateau.x
-			return {
-				x: newX,
-				y: position.y,
-				direction: position.direction,
-			}
-		default:
-			//TODO: Throw error
-			return position
+			return { x: newX, y: position.y }
 	}
 }
 
@@ -74,23 +59,19 @@ const rotate = (current: Direction, rotate: Rotation) => {
 export const execute = (
 	plateau: Plateau,
 	position: Position,
+	direction: Direction,
 	instructions: Instruction[]
 ) => {
 	instructions.forEach(instruction => {
 		if (instruction === "M") {
-			const result = move(plateau, position)
-			position.x = result.x
-			position.y = result.y
+			position = move(plateau, position, direction)
 		}
 
 		if (["L", "R"].indexOf(instruction) !== -1) {
-			position.direction = rotate(
-				position.direction,
-				instruction as Rotation
-			)
+			direction = rotate(direction, instruction as Rotation)
 		}
 		//TODO: Other cases should throw error
 	})
 
-	console.log(`${position.x} ${position.y} ${position.direction}`)
+	console.log(`${position.x} ${position.y} ${direction}`)
 }
