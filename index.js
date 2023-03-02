@@ -21,7 +21,7 @@ const move = (x, y, direction) => {
 }
 
 const rotate = (current, rotate) => {
-	switch (direction) {
+	switch (current) {
 		case "N":
 			if (rotate === "L") return "W"
 			return "E"
