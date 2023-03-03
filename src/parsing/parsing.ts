@@ -2,7 +2,7 @@ import * as movement from "../movement/movement"
 import * as rotation from "../rotation/rotation"
 import * as interpretation from "../interpretation/interpretation"
 
-export const isNonNegativeInteger = (input: Number): Boolean => {
+const isNonNegativeInteger = (input: Number): Boolean => {
 	return Number.isInteger(input) && input >= 0
 }
 
@@ -75,19 +75,19 @@ export const parsePositionAndDirection = (
 	return { status: "success", position: { x, y }, direction }
 }
 
+const isInvalidInstruction = (v: string) =>
+	interpretation.InstructionNames.every(k => k != v)
+
+const hasInvalidInstruction = (instructions: string[]): Boolean =>
+	instructions.find(instruction => isInvalidInstruction(instruction)) !==
+	undefined
+
 export type parseInstructionsResult =
 	| {
 			status: "success"
 			result: interpretation.Instruction[]
 	  }
 	| { status: "error"; error: Error }
-
-export const isInvalidInstruction = (v: string) =>
-	interpretation.InstructionNames.every(k => k != v)
-
-export const hasInvalidInstruction = (instructions: string[]): Boolean =>
-	instructions.find(instruction => isInvalidInstruction(instruction)) !==
-	undefined
 
 export const parseInstructions = (line: string): parseInstructionsResult => {
 	const instructions = line.split("")
