@@ -4,8 +4,8 @@ import fs from "node:fs"
 import path from "node:path"
 
 import * as interpretation from "./interpretation"
-import * as movement from "./movement"
-import * as rotation from "./rotation"
+import * as movement from "./movement/movement"
+import * as rotation from "./rotation/rotation"
 
 const readInterface = readline.createInterface({
 	input: fs.createReadStream(path.join("./", argv[2])),

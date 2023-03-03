@@ -2,8 +2,8 @@ export type Instruction = Move | Rotation
 export type Rotation = "L" | "R"
 export type Move = "M"
 
-import * as movement from "./movement"
-import * as rotation from "./rotation"
+import * as movement from "./movement/movement"
+import * as rotation from "./rotation/rotation"
 
 const move = (
 	position: movement.Position,
@@ -23,8 +23,8 @@ const move = (
 }
 
 const rotate = (current: rotation.Direction, rotate: Rotation) => {
-	if (rotate === "L") return rotation.RotateLeft(current)
-	return rotation.RotateRight(current)
+	if (rotate === "L") return rotation.rotateLeft(current)
+	return rotation.rotateRight(current)
 }
 
 export const execute = (
