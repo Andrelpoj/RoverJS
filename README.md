@@ -58,6 +58,6 @@ So I had to use patterns like: discriminated unions to deal with error handling 
 
 ## Possible Improvements
 
-1. More tests (tests for Parsing Module, e2e tests, etc)
+1. More tests (e2e tests, bigger test coverage, etc)
 2. Expand to have more Movement and Rotation possibilities
 3. Generating persistent logs instead of only using console.log
