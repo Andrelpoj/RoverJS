@@ -13,7 +13,7 @@ const readInterface = readline.createInterface({
 
 let currentLine = -1
 
-let plateau: movement.Position
+let plateau: movement.Plateau
 let position: movement.Position
 let direction: rotation.Direction
 let instructions: interpretation.Instruction[]
@@ -24,7 +24,9 @@ readInterface.on("line", function (line) {
 	//TODO: Add validations for plateau, position and instructions lines
 	if (currentLine === 0) {
 		const raw = line.split(" ")
-		plateau = { x: +raw[0], y: +raw[1] }
+		const max = { x: +raw[0], y: +raw[1] }
+		const min = { x: 0, y: 0 }
+		plateau = { min, max }
 		return
 	}
 

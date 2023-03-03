@@ -6,19 +6,19 @@ import * as movement from "./movement"
 import * as rotation from "./rotation"
 
 const move = (
-	plateau: movement.Position,
 	position: movement.Position,
-	direction: rotation.Direction
+	direction: rotation.Direction,
+	plateau: movement.Plateau
 ): movement.Position => {
 	switch (direction) {
 		case "N":
-			return movement.MoveNorth(plateau, position)
+			return movement.moveNorth(position, plateau)
 		case "S":
-			return movement.MoveSouth(plateau, position)
+			return movement.moveSouth(position, plateau)
 		case "W":
-			return movement.MoveWest(plateau, position)
+			return movement.moveWest(position, plateau)
 		case "E":
-			return movement.MoveEast(plateau, position)
+			return movement.moveEast(position, plateau)
 	}
 }
 
@@ -28,14 +28,14 @@ const rotate = (current: rotation.Direction, rotate: Rotation) => {
 }
 
 export const execute = (
-	plateau: movement.Position,
+	plateau: movement.Plateau,
 	position: movement.Position,
 	direction: rotation.Direction,
 	instructions: Instruction[]
 ) => {
 	instructions.forEach(instruction => {
 		if (instruction === "M") {
-			position = move(plateau, position, direction)
+			position = move(position, direction, plateau)
 		}
 
 		if (["L", "R"].indexOf(instruction) !== -1) {

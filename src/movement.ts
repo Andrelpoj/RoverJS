@@ -3,19 +3,30 @@ export type Position = {
 	y: number
 }
 
-export const MoveNorth = (plateau: Position, position: Position) => {
-	const newY = position.y + 1 <= plateau.y ? position.y + 1 : plateau.y
+export type Plateau = {
+	min: Position
+	max: Position
+}
+
+export const moveNorth = (position: Position, plateau: Plateau) => {
+	const newY = position.y < plateau.max.y ? position.y + 1 : plateau.max.y
 	return { x: position.x, y: newY }
 }
-export const MoveSouth = (plateau: Position, position: Position) => {
-	const newY = position.y - 1 >= 0 ? position.y - 1 : 0
+
+export const moveSouth = (position: Position, plateau: Plateau) => {
+	console.log(position.y)
+	console.log(position.y > plateau.min.y)
+	const newY = position.y > plateau.min.y ? position.y - 1 : 0
+	console.log(newY)
 	return { x: position.x, y: newY }
 }
-export const MoveWest = (plateau: Position, position: Position) => {
-	const newX = position.x - 1 >= 0 ? position.x - 1 : 0
+
+export const moveWest = (position: Position, plateau: Plateau) => {
+	const newX = position.x > plateau.min.x ? position.x - 1 : 0
 	return { x: newX, y: position.y }
 }
-export const MoveEast = (plateau: Position, position: Position) => {
-	const newX = position.x + 1 <= plateau.x ? position.x + 1 : plateau.x
+
+export const moveEast = (position: Position, plateau: Plateau) => {
+	const newX = position.x < plateau.max.x ? position.x + 1 : plateau.max.x
 	return { x: newX, y: position.y }
 }
