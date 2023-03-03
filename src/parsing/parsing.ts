@@ -57,7 +57,7 @@ export const parsePositionAndDirection = (
 		return {
 			status: "error",
 			error: Error(
-				"invalid value at position definition: must be NonNegativeInteger"
+				"invalid value at position definition: (must be NonNegativeInteger)"
 			),
 		}
 	}
