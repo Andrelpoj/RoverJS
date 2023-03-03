@@ -1,4 +1,5 @@
 export type Direction = "N" | "E" | "S" | "W"
+export const DirectionNames = ["N", "E", "S", "W"] as const
 
 const directionsOrder: Direction[] = ["N", "E", "S", "W"]
 

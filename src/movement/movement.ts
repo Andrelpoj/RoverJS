@@ -12,7 +12,6 @@ export type MoveResult =
 	| { status: "success"; result: Position }
 	| { status: "error"; error: Error }
 
-//TODO: Create other validations for position and plateau (e.g.: negative values should not be valid)
 const validatePositionInPlateau = (
 	position: Position,
 	plateau: Plateau

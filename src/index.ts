@@ -6,39 +6,52 @@ import path from "node:path"
 import * as interpretation from "./interpretation/interpretation"
 import * as movement from "./movement/movement"
 import * as rotation from "./rotation/rotation"
-
-const readInterface = readline.createInterface({
-	input: fs.createReadStream(path.join("./", argv[2])),
-})
-
-let currentLine = -1
+import * as parsing from "./parsing/parsing"
 
 let plateau: movement.Plateau
 let position: movement.Position
 let direction: rotation.Direction
 let instructions: interpretation.Instruction[]
 
+const readInterface = readline.createInterface({
+	input: fs.createReadStream(path.join("./", argv[2])),
+})
+
+let currentLine = -1
 readInterface.on("line", function (line) {
 	++currentLine
 
-	//TODO: Add validations for plateau, position and instructions lines
 	if (currentLine === 0) {
-		const raw = line.split(" ")
-		const max = { x: +raw[0], y: +raw[1] }
-		const min = { x: 0, y: 0 }
-		plateau = { min, max }
+		const result = parsing.parsePlateau(line)
+		if (result.status === "error") {
+			console.log(`Parsing error: ${result.error}`)
+			return
+		}
+
+		plateau = result.result
 		return
 	}
 
 	const isPosition = currentLine % 2 === 1
 	if (isPosition) {
-		const raw = line.split(" ")
-		position = { x: +raw[0], y: +raw[1] }
-		direction = raw[2] as rotation.Direction
+		const result = parsing.parsePositionAndDirection(line)
+		if (result.status === "error") {
+			console.log(`Parsing error: ${result.error}`)
+			return
+		}
+
+		position = result.position
+		direction = result.direction
 		return
 	}
 
-	//TODO: Check if has invalid instruction
-	instructions = line.split("").map(v => v as interpretation.Instruction)
+	const result = parsing.parseInstructions(line)
+	if (result.status === "error") {
+		console.log(`Parsing error: ${result.error}`)
+		return
+	}
+
+	instructions = result.result
+
 	interpretation.execute(plateau, position, direction, instructions)
 })
