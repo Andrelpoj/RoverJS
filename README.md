@@ -45,7 +45,7 @@ The project has 4 modules necessary to run the program, the dependencies are rep
 Movement: Defines possible rover movements
 Rotation: Defines possible rover rotations
 Interpretation: Defines the instructions interpretation language and calls Movement and Rotation
-Parsing: Parses input file and calls Interpretation
+Parsing: Parses strings and calls Interpretation
 
 ## Decisions
 
