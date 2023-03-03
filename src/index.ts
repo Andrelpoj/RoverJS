@@ -3,7 +3,7 @@ import readline from "node:readline"
 import fs from "node:fs"
 import path from "node:path"
 
-import * as process from "./process"
+import * as interpretation from "./interpretation"
 import * as movement from "./movement"
 import * as rotation from "./rotation"
 
@@ -16,7 +16,7 @@ let currentLine = -1
 let plateau: movement.Position
 let position: movement.Position
 let direction: rotation.Direction
-let instructions: process.Instruction[]
+let instructions: interpretation.Instruction[]
 
 readInterface.on("line", function (line) {
 	++currentLine
@@ -36,6 +36,6 @@ readInterface.on("line", function (line) {
 		return
 	}
 
-	instructions = line.split("").map(v => v as process.Instruction)
-	process.execute(plateau, position, direction, instructions)
+	instructions = line.split("").map(v => v as interpretation.Instruction)
+	interpretation.execute(plateau, position, direction, instructions)
 })

@@ -6,7 +6,7 @@ import * as movement from "./movement"
 import * as rotation from "./rotation"
 
 const move = (
-	plateau: movement.Plateau,
+	plateau: movement.Position,
 	position: movement.Position,
 	direction: rotation.Direction
 ): movement.Position => {
@@ -28,7 +28,7 @@ const rotate = (current: rotation.Direction, rotate: Rotation) => {
 }
 
 export const execute = (
-	plateau: movement.Plateau,
+	plateau: movement.Position,
 	position: movement.Position,
 	direction: rotation.Direction,
 	instructions: Instruction[]
