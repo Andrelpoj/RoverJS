@@ -1,4 +1,8 @@
-import { parsePlateau, parsePositionAndDirection } from "./parsing"
+import {
+	parsePlateau,
+	parsePositionAndDirection,
+	parseInstructions,
+} from "./parsing"
 describe("test parsePlateau function", () => {
 	it("should return error when line has wrong number of parameters", () => {
 		const result = parsePlateau("1 1 1")
@@ -90,5 +94,33 @@ describe("test parsePositionAndDirection function", () => {
 		}
 	})
 })
-//TODO: positionAndDirection
-//TODO: instruction
+
+describe("test parseInstructions function", () => {
+	it("should return error when has invalid instruction", () => {
+		const result = parseInstructions("LLLRRRMMMK")
+
+		expect(result.status).toBe("error")
+		result.status === "error" &&
+			expect(result.error).toStrictEqual(
+				Error(`invalid instruction. must be one of these: M | L | R`)
+			)
+	})
+
+	it("should return success", () => {
+		const result = parseInstructions("LLLRRRMMM")
+
+		expect(result.status).toBe("success")
+		result.status === "success" &&
+			expect(result.result).toStrictEqual([
+				"L",
+				"L",
+				"L",
+				"R",
+				"R",
+				"R",
+				"M",
+				"M",
+				"M",
+			])
+	})
+})
