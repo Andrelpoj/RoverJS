@@ -1,10 +1,10 @@
+import * as movement from "../movement/movement"
+import * as rotation from "../rotation/rotation"
+
 export type Instruction = Move | Rotation
 export type Rotation = "L" | "R"
 export type Move = "M"
 export const InstructionNames = ["L", "R", "M"] as const
-
-import * as movement from "../movement/movement"
-import * as rotation from "../rotation/rotation"
 
 const move = (
 	position: movement.Position,
