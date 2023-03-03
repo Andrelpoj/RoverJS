@@ -2,8 +2,8 @@ export type Instruction = Move | Rotation
 export type Rotation = "L" | "R"
 export type Move = "M"
 
-import * as movement from "./movement/movement"
-import * as rotation from "./rotation/rotation"
+import * as movement from "../movement/movement"
+import * as rotation from "../rotation/rotation"
 
 const move = (
 	position: movement.Position,

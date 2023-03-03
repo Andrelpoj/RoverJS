@@ -3,7 +3,7 @@ import readline from "node:readline"
 import fs from "node:fs"
 import path from "node:path"
 
-import * as interpretation from "./interpretation"
+import * as interpretation from "./interpretation/interpretation"
 import * as movement from "./movement/movement"
 import * as rotation from "./rotation/rotation"
 
@@ -38,6 +38,7 @@ readInterface.on("line", function (line) {
 		return
 	}
 
+	//TODO: Check if has invalid instruction
 	instructions = line.split("").map(v => v as interpretation.Instruction)
 	interpretation.execute(plateau, position, direction, instructions)
 })
