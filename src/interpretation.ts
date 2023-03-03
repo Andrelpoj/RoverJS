@@ -9,7 +9,7 @@ const move = (
 	position: movement.Position,
 	direction: rotation.Direction,
 	plateau: movement.Plateau
-): movement.Position => {
+): movement.MoveResult => {
 	switch (direction) {
 		case "N":
 			return movement.moveNorth(position, plateau)
@@ -33,16 +33,28 @@ export const execute = (
 	direction: rotation.Direction,
 	instructions: Instruction[]
 ) => {
-	instructions.forEach(instruction => {
+	for (let instruction of instructions) {
+		if (["M", "L", "R"].indexOf(instruction) === -1) {
+			console.log(
+				`Error executing instructions: invalid instruction value: ${instruction}`
+			)
+			return
+		}
+
 		if (instruction === "M") {
-			position = move(position, direction, plateau)
+			const moveResult = move(position, direction, plateau)
+			if (moveResult.status === "error") {
+				console.log("Error executing instructions: ", moveResult.error)
+				return
+			}
+
+			position = moveResult.result
 		}
 
 		if (["L", "R"].indexOf(instruction) !== -1) {
 			direction = rotate(direction, instruction as Rotation)
 		}
-		//TODO: Other cases should throw error
-	})
+	}
 
 	console.log(`${position.x} ${position.y} ${direction}`)
 }

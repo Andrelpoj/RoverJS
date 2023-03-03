@@ -6,14 +6,33 @@ describe("test moveNorth function", () => {
 		const position = { x: 2, y: 4 }
 		const expected = { x: 2, y: 5 }
 
-		expect(moveNorth(position, plateau)).toStrictEqual(expected)
+		const moveResult = moveNorth(position, plateau)
+
+		expect(moveResult.status).toBe("success")
+		moveResult.status === "success" &&
+			expect(moveResult.result).toStrictEqual(expected)
 	})
 	it("should not move when plateau limits", () => {
 		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
 		const position = { x: 2, y: 6 }
 		const expected = { x: 2, y: 6 }
 
-		expect(moveNorth(position, plateau)).toStrictEqual(expected)
+		const moveResult = moveNorth(position, plateau)
+
+		expect(moveResult.status).toBe("success")
+		moveResult.status === "success" &&
+			expect(moveResult.result).toStrictEqual(expected)
+	})
+	it("should return error when invalid position for plateau", () => {
+		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
+		const position = { x: 4, y: 6 }
+		const expected = Error("invalid position for plateau")
+
+		const moveResult = moveNorth(position, plateau)
+
+		expect(moveResult.status).toBe("error")
+		moveResult.status === "error" &&
+			expect(moveResult.error).toStrictEqual(expected)
 	})
 })
 
@@ -23,14 +42,33 @@ describe("test moveSouth function", () => {
 		const position = { x: 2, y: 4 }
 		const expected = { x: 2, y: 3 }
 
-		expect(moveSouth(position, plateau)).toStrictEqual(expected)
+		const moveResult = moveSouth(position, plateau)
+
+		expect(moveResult.status).toBe("success")
+		moveResult.status === "success" &&
+			expect(moveResult.result).toStrictEqual(expected)
 	})
 	it("should not move when plateau limits", () => {
 		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
 		const position = { x: 0, y: 0 }
 		const expected = { x: 0, y: 0 }
 
-		expect(moveSouth(position, plateau)).toStrictEqual(expected)
+		const moveResult = moveSouth(position, plateau)
+
+		expect(moveResult.status).toBe("success")
+		moveResult.status === "success" &&
+			expect(moveResult.result).toStrictEqual(expected)
+	})
+	it("should return error when invalid position for plateau", () => {
+		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
+		const position = { x: 4, y: 6 }
+		const expected = Error("invalid position for plateau")
+
+		const moveResult = moveSouth(position, plateau)
+
+		expect(moveResult.status).toBe("error")
+		moveResult.status === "error" &&
+			expect(moveResult.error).toStrictEqual(expected)
 	})
 })
 
@@ -40,30 +78,68 @@ describe("test moveWest function", () => {
 		const position = { x: 1, y: 4 }
 		const expected = { x: 0, y: 4 }
 
-		expect(moveWest(position, plateau)).toStrictEqual(expected)
+		const moveResult = moveWest(position, plateau)
+
+		expect(moveResult.status).toBe("success")
+		moveResult.status === "success" &&
+			expect(moveResult.result).toStrictEqual(expected)
 	})
 	it("should not move when plateau limits", () => {
 		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
 		const position = { x: 0, y: 4 }
 		const expected = { x: 0, y: 4 }
 
-		expect(moveWest(position, plateau)).toStrictEqual(expected)
+		const moveResult = moveWest(position, plateau)
+
+		expect(moveResult.status).toBe("success")
+		moveResult.status === "success" &&
+			expect(moveResult.result).toStrictEqual(expected)
+	})
+	it("should return error when invalid position for plateau", () => {
+		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
+		const position = { x: 4, y: 6 }
+		const expected = Error("invalid position for plateau")
+
+		const moveResult = moveWest(position, plateau)
+
+		expect(moveResult.status).toBe("error")
+		moveResult.status === "error" &&
+			expect(moveResult.error).toStrictEqual(expected)
 	})
 })
 
 describe("test moveEast function", () => {
 	it("should move one when plateau allows", () => {
 		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
-		const position = { x: 4, y: 4 }
-		const expected = { x: 5, y: 4 }
+		const position = { x: 2, y: 4 }
+		const expected = { x: 3, y: 4 }
 
-		expect(moveEast(position, plateau)).toStrictEqual(expected)
+		const moveResult = moveEast(position, plateau)
+
+		expect(moveResult.status).toBe("success")
+		moveResult.status === "success" &&
+			expect(moveResult.result).toStrictEqual(expected)
 	})
 	it("should not move when plateau limits", () => {
 		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
 		const position = { x: 3, y: 5 }
 		const expected = { x: 3, y: 5 }
 
-		expect(moveEast(position, plateau)).toStrictEqual(expected)
+		const moveResult = moveEast(position, plateau)
+
+		expect(moveResult.status).toBe("success")
+		moveResult.status === "success" &&
+			expect(moveResult.result).toStrictEqual(expected)
+	})
+	it("should return error when invalid position for plateau", () => {
+		const plateau = { min: { x: 0, y: 0 }, max: { x: 3, y: 6 } }
+		const position = { x: 4, y: 6 }
+		const expected = Error("invalid position for plateau")
+
+		const moveResult = moveEast(position, plateau)
+
+		expect(moveResult.status).toBe("error")
+		moveResult.status === "error" &&
+			expect(moveResult.error).toStrictEqual(expected)
 	})
 })
